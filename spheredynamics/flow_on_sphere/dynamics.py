@@ -22,7 +22,6 @@ Omega_xs = Omega_magnitudes * np.sin(Omega_direction_theta) * np.cos(Omega_direc
 Omega_ys = Omega_magnitudes * np.sin(Omega_direction_theta) * np.sin(Omega_direction_phi)
 Omega_zs = Omega_magnitudes * np.cos(Omega_direction_theta)
 
-
 r_vec, theta_vec, phi_vec = np.zeros((N,3)), np.zeros((N,3)), np.zeros((N,3))  
 #[:,0];x [:,1];y [:,2];z
 k1, k2, k3 =  np.zeros((N,4)), np.zeros((N,4)), np.zeros((N,4))
@@ -52,7 +51,7 @@ def F_spherelohe(thetas,phies):
 	theta_dot = Kappa/N * ( theta_vec[:,0] * dumx + theta_vec[:,1] * dumy + theta_vec[:,2] * dumz )
 	theta_dot += phi_vec[:,0]*Omega_xs+phi_vec[:,1]*Omega_ys+phi_vec[:,2]*Omega_zs
 	
-	phi_dot   = Kappa/N * ( phi_vec[:,0] * dumx + phi_vec[:,1] * dumy + phi_vec[:,2] * dumz )
+	phi_dot  = Kappa/N * ( phi_vec[:,0] * dumx + phi_vec[:,1] * dumy + phi_vec[:,2] * dumz )
 	phi_dot -= theta_vec[:,0]*Omega_xs+theta_vec[:,1]*Omega_ys+theta_vec[:,2]*Omega_zs
 	sininv = np.where(np.sin(thetas) < eps , 0, 1/np.sin(thetas))
 	phi_dot = np.multiply(phi_dot,sininv)
@@ -102,6 +101,10 @@ def iterate_xyz_by_proj(xs,ys,zs):
 	
 	return newxs, newys, newzs
 
-def asdf():
-	print('asdfadfasdfasdf',N)
+def get_omega_representative():
+	w_x = np.mean(Omega_xs)
+	w_y = np.mean(Omega_ys)
+	w_z = np.mean(Omega_zs)
+	A = math.sqrt(w_x**2+w_y**2+w_z**2)
+	return w_x,w_y,w_z,A
 
