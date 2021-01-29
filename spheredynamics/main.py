@@ -166,7 +166,7 @@ c = input('\n'+'Save Data?: ')
 if c=='y':
 
 	print('Data is being saved...')
-	ani.save(filename='./flow_sample.gif',writer='ffmpeg',dpi=80,fps=30, progress_callback = lambda i, n: print(f'Saving frame {i} of {n}'))
+	ani.save(filename='./flow.gif',writer='ffmpeg',dpi=80,fps=30, progress_callback = lambda i, n: print(f'Saving frame {i} of {n}'))
 	print('saving process completed')
 
 plt.show()
